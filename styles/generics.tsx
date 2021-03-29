@@ -24,7 +24,11 @@ export const textStyles = StyleSheet.create({
 export const container = StyleSheet.create({
     basicContainer: {
         padding: 16
-    }
+    },
+    homeContainer: {
+        padding: 16,
+        paddingTop: 0,
+    },
 });
 
 //WEEKDAY STYLE
