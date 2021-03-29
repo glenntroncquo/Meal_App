@@ -33,22 +33,26 @@ export const calendarStyle = StyleSheet.create({
         backgroundColor: colors.lightGreen,
         paddingRight:16,
         paddingLeft:16,
-        paddingBottom: 20,
-        paddingTop: 20,
+        paddingBottom: 18,
+        paddingTop: 18,
         borderRadius:50,
-        justifyContent: 'center'
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 90,
+        minWidth: 60,
+        maxWidth: 60,
     },
     inactiveDay: {
-        backgroundColor: colors.lightGreen,
+        backgroundColor: 'white',
         paddingRight:16,
         paddingLeft:16,
-        paddingBottom: 20,
-        paddingTop: 20,
+        paddingBottom: 18,
+        paddingTop: 18,
         borderRadius:50,
-        justifyContent: 'center'
+        alignItems:'center',
+        justifyContent: 'center',
     }
 })
-
 
 
 export default styles;

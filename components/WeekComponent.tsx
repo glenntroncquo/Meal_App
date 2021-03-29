@@ -1,57 +1,50 @@
-import React from 'react';
-import { View, TouchableOpacity, Text} from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 
-import colors from '../styles/colors';
 import { calendarStyle } from '../styles/generics';
 
+const WeekComponent: React.FC = () => {
+  const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
+  const date = new Date();
+  const day = date.getDay();
+  const month = date.getMonth();
+  console.log(day,month)
+  
 
-const WeekComponent = () => {
-    return(
-        <View style={{display:'flex', flexDirection:'row', justifyContent:'center', paddingRight:4, paddingLeft:4}}>
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity>
+  const [activeDay, setActiveDay] = useState('th');
 
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity> 
+  const handleClick = (selectedDay: string) => {
+    setActiveDay(selectedDay);
+  };
 
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity> 
+  const arrDays = daysOfWeek.map((day: string) => {
+      return (
+        <TouchableOpacity
+          key={day}
+          style={day === activeDay ? calendarStyle.activeDay : calendarStyle.inactiveDay}
+          activeOpacity={0.7}
+          onPress={() => handleClick(day)}
+          >
+          <Text style={{ color: day === activeDay ? 'white' : 'gray', fontSize: 16 }}>{day}</Text>
+          <Text style={{ color: day === activeDay ? 'white' : 'black', fontSize: 16, fontWeight: 'bold' }}>14</Text>
+        </TouchableOpacity>
+      );
+    }
+  );
 
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity> 
-
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity> 
-
-            <TouchableOpacity style={[calendarStyle.activeDay, {backgroundColor: 'red'}]} activeOpacity={.7} onPress={() => {
-            }}>
-                <Text style={{color:'#FFFFFF', fontSize:14}}>{'fr'}</Text>
-                <Text style={{color:'#FFFFFF', fontSize:14, fontWeight:'bold'}}>{'18'}</Text>
-            </TouchableOpacity> 
-        </View>
-    );
-}
-
+  return (
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingRight: 4,
+        paddingLeft: 4,
+      }}
+    >
+      {arrDays}
+    </View>
+  );
+};
 
 export default WeekComponent;
