@@ -4,5 +4,6 @@ export default  {
     lightGreen: '#3DCC8E',
     normalGreen: '#00C68E',
     darkGreen: '#03B898',
-    white: '#FFFFFF'
+    white: '#FFFFFF',
+    opacityGreen: '#8AD3C6',
 }

@@ -12,8 +12,6 @@ interface Props {
 
 export const ImageCarouselComponent: React.FC<Props> = ({ dayIndex }) => {
   const screen = Dimensions.get('screen').width;
-  console.log(screen);
-  console.log(dayIndex);
   const images = new Array(
     'https://spoonacular.com/recipeImages/665744-556x370.jpg',
     'https://spoonacular.com/recipeImages/637876-312x231.jpg',

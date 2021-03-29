@@ -18,6 +18,11 @@ export const textStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
+  semiBold: {
+      fontSize:20,
+      fontWeight:'bold'
+  }
 });
 
 //CONTAINERS

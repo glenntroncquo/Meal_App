@@ -4,6 +4,7 @@ import { container, textStyles } from '../../styles/generics';
 
 import WeekComponent from '../../components/WeekComponent';
 import { ImageCarouselComponent } from '../../components/ImageCarouselComponent';
+import { OptionsComponent } from '../../components/Home/OptionsComponent';
 const Home = () => {
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
   const date = new Date();
@@ -20,19 +21,17 @@ const Home = () => {
     <View style={container.homeContainer}>
       <Text style={[textStyles.normal]}>Your weekly overview</Text>
 
+      <Text style={[textStyles.semiBold, {marginBottom:-6, marginTop:16}]}>Friday</Text>
       <WeekComponent handleClick={handleClick} activeDay={activeDay} />
-      {/* <Image
-        source={{
-          uri: 'https://spoonacular.com/recipeImages/637876-312x231.jpg',
-        }}
-        style={{ width: 250, height: 250, borderRadius: 200 }}
-      /> */}
-      <Text style={textStyles.normalBold}>Friday Afternoon</Text>
+
+      <Text style={[textStyles.semiBold, {marginTop:28, marginBottom:8}]}>Afternoon</Text>
 
       <ImageCarouselComponent
         activeDay={activeDay}
         dayIndex={daysOfWeek.indexOf(activeDay)}
       />
+
+      <OptionsComponent/>
     </View>
   );
 };
