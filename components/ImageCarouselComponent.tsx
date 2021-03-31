@@ -18,7 +18,7 @@ export const ImageCarouselComponent: React.FC<Props> = ({ dayIndex }) => {
     'https://spoonacular.com/recipeImages/646034-556x370.jpg',
     'https://spoonacular.com/recipeImages/639031-556x370.jpg',
     'https://spoonacular.com/recipeImages/642129-556x370.jpg',
-    'https://spoonacular.com/recipeImages/640383-556x370.jpg',
+    'https://spoonacular.com/recipeImages/632502-556x370.jpg',
     'https://spoonacular.com/recipeImages/632502-556x370.jpg'
   );
 
