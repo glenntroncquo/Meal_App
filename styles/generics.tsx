@@ -92,9 +92,51 @@ export const searchBar = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
   },
-  test : {
-    
-  }
+  test: {},
 });
+
+// TEXTINPUT STYLING
+
+export const textInputStyle = StyleSheet.create({
+  normal: {
+    borderBottomColor: 'lightgray',
+    borderBottomWidth: 1,
+    fontSize:22,
+    height: 54,
+    width: Dimensions.get('screen').width-64,
+    padding:8,
+    marginBottom:16,
+  },
+
+  active: {
+    borderBottomColor: colors.darkGreen,
+    borderBottomWidth: 2,
+    height: 54,
+    width: Dimensions.get('screen').width-64,
+    padding:8,
+    fontSize:22,
+    marginBottom:16,
+  },
+});
+
+// LOGINBUTTON, PASSWORD
+export const buttonStyle = StyleSheet.create({
+  login: {
+    marginTop:32,
+    backgroundColor: colors.darkGreen,
+    width: Dimensions.get('screen').width-64,
+    height:54,
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:100,
+  },
+
+  forgotPassword: {
+    flex:1,
+    // justifyContent:'flex-end',
+    // alignItems:'flex-end'
+  }
+})
+
 
 export default styles;
