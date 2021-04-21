@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { container, textStyles } from '../../styles/generics';
 
-import WeekComponent from '../../components/WeekComponent';
-import { ImageCarouselComponent } from '../../components/ImageCarouselComponent';
+import WeekComponent from '../../components/Home/WeekComponent';
+import { ImageCarouselComponent } from '../../components/Home/ImageCarouselComponent';
 import { OptionsComponent } from '../../components/Home/OptionsComponent';
-const Home = () => {
+
+
+const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
 
   const date = new Date();
@@ -24,13 +26,12 @@ const Home = () => {
 
       <WeekComponent handleClick={handleClick} dayIndex={dayIndex} dayOfMonth={dayOfMonth}/>
 
-      <Text style={[textStyles.semiBold, {marginTop:28, marginBottom:8}]}>Afternoon</Text>
-
       <ImageCarouselComponent
         activeDay={daysOfWeek[dayIndex]}
         dayIndex={dayIndex}
       />
-
+      <Text style={[textStyles.semiBold, {marginBottom:16}]}>Explore</Text>
+      <OptionsComponent/>
       <OptionsComponent/>
     </View>
   );

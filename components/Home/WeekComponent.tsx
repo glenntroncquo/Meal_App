@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 
-import { calendarStyle, textStyles } from '../styles/generics';
+import { calendarStyle, textStyles } from '../../styles/generics';
 
 interface Props {
   dayIndex: number;
@@ -69,17 +69,18 @@ const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
 
   return (
     <View>
-      <Text style={[textStyles.semiBold, { marginBottom: -6, marginTop: 16 }]}>
-        {daysOfWeek2[dayIndex]}
+      <Text style={[textStyles.semiBold, { marginBottom: -6, marginTop: 32 }]}>
+        {daysOfWeek2[dayIndex]} morning
       </Text>
       <View
         style={{
           display: 'flex',
           flexDirection: 'row',
           justifyContent: 'center',
-          paddingRight: 4,
-          paddingLeft: 4,
-          paddingTop: 8,
+          marginRight: 4,
+          marginLeft: 4,
+          marginTop: 8,
+          marginBottom: 16,
         }}
       >
         {arrDays}

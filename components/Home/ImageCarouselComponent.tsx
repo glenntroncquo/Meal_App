@@ -1,9 +1,9 @@
 import React from 'react';
-import { Dimensions, Image, ImageBackground, Text, View } from 'react-native';
+import { Dimensions, ImageBackground, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import colors from '../styles/colors';
+import colors from '../../styles/colors';
 
-import { carouselStyle } from '../styles/generics';
+import { carouselStyle } from '../../styles/generics';
 
 interface Props {
   activeDay: string;
@@ -23,30 +23,34 @@ export const ImageCarouselComponent: React.FC<Props> = ({ dayIndex }) => {
   );
 
   return (
-    <>
-      {/* <Image source={{ uri: images[dayIndex] }} style={carouselStyle.image} /> */}
+    <View style={{marginBottom:24}}>
       <TouchableOpacity
         activeOpacity={0.7}
+        style={{}}
       >
         <ImageBackground
           source={{ uri: images[dayIndex] }}
           style={carouselStyle.image}
-          imageStyle={{ borderRadius: 16 }}
+          imageStyle={{ borderRadius: 0, borderBottomLeftRadius:32, borderTopRightRadius:32 }}
         >
           <View
             style={{
               backgroundColor: colors.darkGreen,
               alignSelf: 'flex-end',
-              width: Dimensions.get('screen').width - 32,
+
+              // width: Dimensions.get('screen').width - 32,
+              padding:16,
               borderRadius: 32,
+              borderTopLeftRadius:0,
+              borderBottomEndRadius:0,
             }}
           >
-            <Text style={{ alignSelf: 'center', color: 'white', fontSize: 32 }}>
+            <Text style={{ color: 'white', fontSize: 16 }}>
               Cookies
             </Text>
           </View>
         </ImageBackground>
       </TouchableOpacity>
-    </>
+    </View>
   );
 };

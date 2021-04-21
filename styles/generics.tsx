@@ -18,11 +18,14 @@ export const textStyles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  semi: {
+    fontSize: 20,
+  },
 
   semiBold: {
-      fontSize:20,
-      fontWeight:'bold'
-  }
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });
 
 //CONTAINERS
@@ -36,30 +39,33 @@ export const container = StyleSheet.create({
   },
 });
 
+//NAVIGATION STYLING
+export const navigationStyle = StyleSheet.create({
+  header: {
+    backgroundColor: 'white',
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+});
+
 //WEEKDAY STYLE
 export const calendarStyle = StyleSheet.create({
   activeDay: {
     backgroundColor: colors.lightGreen,
-    paddingRight: 16,
-    paddingLeft: 16,
-    paddingBottom: 18,
-    paddingTop: 18,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 90,
-    minWidth: 60,
-    maxWidth: 60,
+    height: 70,
+    minWidth: 50,
+    maxWidth: 50,
   },
   inactiveDay: {
     backgroundColor: 'white',
-    paddingRight: 16,
-    paddingLeft: 16,
-    paddingBottom: 18,
-    paddingTop: 18,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',
+    minWidth: 50,
+    maxWidth: 50,
   },
 });
 
@@ -67,12 +73,28 @@ export const calendarStyle = StyleSheet.create({
 
 export const carouselStyle = StyleSheet.create({
   image: {
-    width: Dimensions.get('screen').width -32,
+    width: Dimensions.get('screen').width - 32,
     height: 160,
     borderRadius: 32,
     paddingBottom: 0,
-    flexDirection:'row',
+    flexDirection: 'row',
   },
+});
+
+// SEARCHBAR STYLING
+
+export const searchBar = StyleSheet.create({
+  style: {
+    width: Dimensions.get('window').width - 32,
+    backgroundColor: colors.opacityGray,
+    padding: 16,
+    borderRadius: 4,
+    flexDirection: 'row',
+    alignSelf: 'center',
+  },
+  test : {
+    
+  }
 });
 
 export default styles;

@@ -13,13 +13,15 @@ import colors from '../styles/colors';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator: React.FC = () => {
+
   return (
     <Tab.Navigator
       initialRouteName='Home'
       tabBarOptions={{
+        keyboardHidesTabBar:true,
         activeTintColor: colors.white,
         inactiveTintColor: '#D9D7D7',
-        style: { height: 58, backgroundColor: colors.darkGreen },
+        style: { height: 58, backgroundColor: colors.darkGreen, },
         labelStyle: {
           paddingBottom: 6,
           fontSize: 12,
@@ -57,6 +59,7 @@ const BottomNavigator: React.FC = () => {
       <Tab.Screen
         name='Profile'
         component={ProfileNavigator}
+        
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name='person-sharp' size={24} color={color} />

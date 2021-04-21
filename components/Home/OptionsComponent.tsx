@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export const OptionsComponent: React.FC = () => {
   return (
-    <View style={{ marginTop: 32, flexDirection: 'row' }}>
+    <View style={{ flexDirection: 'row', justifyContent:'space-around', marginBottom:16}}>
       <Option iconName='food-croissant' />
       <Option iconName='food-croissant' />
       <Option iconName='food-croissant' />
@@ -21,8 +21,8 @@ const Option: React.FC<{ iconName: any }> = ({ iconName }) => {
     <TouchableOpacity style={{alignItems:'center'}}>
       <View
         style={{
-          width: 80,
-          height: 80,
+          width: 70,
+          height: 70,
           backgroundColor: colors.opacityGreen,
           borderRadius: 100,
           alignItems: 'center',
