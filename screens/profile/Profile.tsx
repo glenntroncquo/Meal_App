@@ -1,14 +1,23 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const Home = () => {
+const Profile: React.FC<{navigation: any}> = ({navigation}) => {
     return(
         <View>
             <Text>
                 Welcome to your profile!
             </Text>
+
+            <TouchableOpacity
+            onPress={() => navigation.replace('Login')}
+            >
+                <Text>
+                    Logout
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 }
 
-export default Home;
+export default Profile;

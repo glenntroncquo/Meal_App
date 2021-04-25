@@ -18,7 +18,6 @@ const BottomNavigator: React.FC = () => {
     <Tab.Navigator
       initialRouteName='Home'
       tabBarOptions={{
-        keyboardHidesTabBar:true,
         activeTintColor: colors.white,
         inactiveTintColor: '#D9D7D7',
         style: { height: 58, backgroundColor: colors.darkGreen, },

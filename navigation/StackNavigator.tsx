@@ -2,7 +2,6 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import {useRoute} from '@react-navigation/native';
 
 import Explore from '../screens/explore/Explore';
 import Home from '../screens/home/Home';
@@ -11,42 +10,30 @@ import Favorite from '../screens/favorites/Favorite';
 import Profile from '../screens/profile/Profile';
 
 import colors from '../styles/colors';
-import { navigationStyle } from '../styles/generics';
-import { getFocusedRouteNameFromRoute } from '@react-navigation/core';
 
 const Stack = createStackNavigator();
 
 export const HomeNavigator = () => {
   return (
     <Stack.Navigator
+      // screenOptions={{
+      //   headerStyle: {
+      //     backgroundColor: 'white',
+      //     shadowOpacity: 0,
+      //     elevation: 0,
+      //   },
+      //   headerTitleStyle: {
+      //     fontSize: 30,
+      //     paddingTop: 18,
+      //   },
+      //   cardStyle: { backgroundColor: '#fff' },
+      // }}
       screenOptions={{
-        headerStyle: {
-          backgroundColor: 'white',
-          shadowOpacity: 0,
-          elevation: 0,
-        },
-        headerTitleStyle: {
-          fontSize: 30,
-          paddingTop: 18,
-        },
-        cardStyle: { backgroundColor: '#fff' },
+        headerShown: false,
+        
       }}
     >
-      <Stack.Screen
-        name='Hello {glenn},'
-        component={Home}
-        options={{
-          headerRight: () => (
-            <TouchableOpacity>
-              <Ionicons
-                size={28}
-                name='search'
-                color={colors.darkGreen}
-                style={{ margin: 16, marginTop: 40 }}
-              />
-            </TouchableOpacity>
-          ),
-        }}
+      <Stack.Screen name='Home' component={Home}
       />
       <Stack.Screen name='MealDetails' component={MealDetails} />
     </Stack.Navigator>

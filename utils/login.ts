@@ -2,17 +2,22 @@ import React from 'react';
 
 import firebase from './firebase';
 import * as SplashScreen from 'expo-splash-screen';
-import { Authentication } from '../navigation/Authentication';
-import { BottomNavigator } from '../navigation/BottomNavigator';
 
-export const checkLogin: Function = async () => {
+
+export const checkLogin: Function = async (navigation: any) => {
   await SplashScreen.preventAutoHideAsync();
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        
-      return true;
-    } else {
-      return false;
-    }
-  });
+    
+      firebase.auth().onAuthStateChanged(user => {
+        if(user)
+        {
+          navigation.replace('BottomNavigator');
+          SplashScreen.hideAsync();
+        }
+        else
+        {
+          navigation.navigate('Login');
+          SplashScreen.hideAsync();
+        }
+
+      });
 };

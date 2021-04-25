@@ -1,4 +1,4 @@
-import React, { useState, version } from 'react';
+import React, { useEffect, useState, version } from 'react';
 import {
   View,
   Text,
@@ -7,14 +7,31 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 
+import firebase from '../../utils/firebase';
 import colors from '../../styles/colors';
 import { textStyles, textInputStyle, buttonStyle } from '../../styles/generics';
+import { checkLogin } from '../../utils/login';
 
-
-export const Login: React.FC = () => {
+export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [isFocusedEmail, setFocusEmail] = useState(false);
   const [isFocusedPassword, setFocusPassword] = useState(false);
+
+  const [email, setEmail] = useState('testuser@gmail.com');
+  const [password, setPassword] = useState('admin123456');
+
+  const handleLogin = () => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        navigation.replace('BottomNavigator');
+      })
+      .catch(() => {
+        console.log('Foute login');
+      });
+  };
 
   return (
     <View style={{ flex: 1, alignItems: 'center', marginTop: 120 }}>
@@ -23,7 +40,12 @@ export const Login: React.FC = () => {
         style={{ height: 128, width: 128, marginBottom: 16 }}
       />
 
-      <Text style={[textStyles.header, { color: colors.normalGreen, marginBottom: 32 }]}>
+      <Text
+        style={[
+          textStyles.header,
+          { color: colors.normalGreen, marginBottom: 32 },
+        ]}
+      >
         Meal App
       </Text>
 
@@ -32,7 +54,9 @@ export const Login: React.FC = () => {
         style={isFocusedEmail ? textInputStyle.active : textInputStyle.normal}
         onFocus={() => setFocusEmail(true)}
         onBlur={() => setFocusEmail(false)}
+        onChangeText={setEmail}
       />
+
       <TextInput
         placeholder='Password'
         style={
@@ -40,21 +64,16 @@ export const Login: React.FC = () => {
         }
         onFocus={() => setFocusPassword(true)}
         onBlur={() => setFocusPassword(false)}
+        onChangeText={setPassword}
         secureTextEntry={true}
       />
 
-      {/* <TouchableOpacity>
-          <Text>
-              Forgot password??
-          </Text>
-      </TouchableOpacity> */}
-
-      <TouchableOpacity style={buttonStyle.login}>
+      <TouchableOpacity style={buttonStyle.login} onPress={handleLogin}>
         <Text style={{ color: '#FFFF' }}>LOGIN</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-      activeOpacity={0.7}
+        activeOpacity={0.7}
         style={{
           flexDirection: 'row',
           width: Dimensions.get('screen').width - 64,
@@ -64,7 +83,7 @@ export const Login: React.FC = () => {
         }}
       >
         <Text>Don't have an account yet? </Text>
-        <Text style={{color:colors.darkGreen}}>Sign up here</Text>
+        <Text style={{ color: colors.darkGreen }}>Sign up here</Text>
       </TouchableOpacity>
     </View>
   );

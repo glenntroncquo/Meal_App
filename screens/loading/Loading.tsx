@@ -3,6 +3,7 @@ import { View, Text, } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 
 import firebase from '../../utils/firebase';
+import { checkLogin } from '../../utils/login';
 
 export const Loading: React.FC<{navigation: any}> = ({navigation}) => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -12,19 +13,16 @@ export const Loading: React.FC<{navigation: any}> = ({navigation}) => {
   useEffect(() => {
     async function fetchSomeData() {
       await SplashScreen.preventAutoHideAsync();
-      // fetch('https://api.spoonacular.com/recipes/complexSearch?apiKey=c733a037b0ae47f68107283fcd6c6715&query=pasta')
-      // .then(response => response.json())
-      // .then(json => setFetchData(json))
-
+    
       firebase.auth().onAuthStateChanged(user => {
         if(user)
         {
-          console.log('hello')
-          
+          navigation.replace('BottomNavigator');
+          SplashScreen.hideAsync();
         }
         else
         {
-          navigation.navigate('BottomNavigator');
+          navigation.replace('Login');
           SplashScreen.hideAsync();
         }
 
@@ -33,23 +31,12 @@ export const Loading: React.FC<{navigation: any}> = ({navigation}) => {
     };
 
     fetchSomeData();
-    // SplashScreen.hideAsync();
   }, []);
-
-  const onDataLoaded = async () => {
-    
-  }
 
   return (
     <View
-    // onLayout={onDataLoaded}
     style={{flex: 1, alignItems: 'center', marginTop: 120}}
     >
-      <Text>
-        hello loading page
-       
-      </Text>
-
     </View>
 
   );
