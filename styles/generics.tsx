@@ -123,7 +123,7 @@ export const textInputStyle = StyleSheet.create({
 export const buttonStyle = StyleSheet.create({
   login: {
     marginTop:32,
-    backgroundColor: colors.darkGreen,
+    backgroundColor: colors.normalGreen,
     width: Dimensions.get('screen').width-64,
     height:54,
     justifyContent:'center',

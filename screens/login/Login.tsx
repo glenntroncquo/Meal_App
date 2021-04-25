@@ -7,9 +7,10 @@ import {
   Image,
   Dimensions,
 } from 'react-native';
+
 import colors from '../../styles/colors';
 import { textStyles, textInputStyle, buttonStyle } from '../../styles/generics';
-// import { Fontisto, } from 'react-native-vector-icons';
+
 
 export const Login: React.FC = () => {
   const [isFocusedEmail, setFocusEmail] = useState(false);
@@ -22,7 +23,7 @@ export const Login: React.FC = () => {
         style={{ height: 128, width: 128, marginBottom: 16 }}
       />
 
-      <Text style={[textStyles.header, { color: 'green', marginBottom: 32 }]}>
+      <Text style={[textStyles.header, { color: colors.normalGreen, marginBottom: 32 }]}>
         Meal App
       </Text>
 

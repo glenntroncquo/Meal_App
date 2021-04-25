@@ -1,31 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import firebase from './utils/firebase';
 
+import { Authentication } from './navigation/Authentication';
 import { BottomNavigator } from './navigation/BottomNavigator';
-import { Loading } from './screens/loading/Loading';
-import { Login } from './screens/login/Login';
+import { checkLogin } from './utils/login';
 
+export default ()  => {
+  const[loggedIn, setLoggedIn] = useState(false);
 
-const AppNavigator = createStackNavigator();
+  const[screen, setScreen] = useState(<Authentication/>);
 
-export default function App() {
+  const checkIsLoggedIn = async () => {
+    await checkLogin();
+  }
+
+  useEffect(() => {
+
+    checkIsLoggedIn();
+
+  }, []);
+
+  useEffect(() => {
+
+  }, [loggedIn])
+
+ 
+
   return (
     <NavigationContainer>
-      {/* <BottomNavigator/> */}
+      {/* {loggedIn ? <BottomNavigator /> : <Authentication />} */}
+      {/* <Authentication/> */}
 
-      <AppNavigator.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}
-      >
-        <AppNavigator.Screen name='Login' component={Login} />
-        <AppNavigator.Screen name='Loading' component={Loading} />
-        <AppNavigator.Screen
-          name='BottomNavigator'
-          component={BottomNavigator}
-        />
-      </AppNavigator.Navigator>
+      {screen}
     </NavigationContainer>
   );
-}
+};
