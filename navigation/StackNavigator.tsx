@@ -10,30 +10,43 @@ import Favorite from '../screens/favorites/Favorite';
 import Profile from '../screens/profile/Profile';
 
 import colors from '../styles/colors';
+import { BottomNavigator } from './BottomNavigator';
+import { Login } from '../screens/login/Login';
+import { SignUp } from '../screens/login/SignUp';
 
 const Stack = createStackNavigator();
 
 export const HomeNavigator = () => {
   return (
     <Stack.Navigator
-      // screenOptions={{
-      //   headerStyle: {
-      //     backgroundColor: 'white',
-      //     shadowOpacity: 0,
-      //     elevation: 0,
-      //   },
-      //   headerTitleStyle: {
-      //     fontSize: 30,
-      //     paddingTop: 18,
-      //   },
-      //   cardStyle: { backgroundColor: '#fff' },
-      // }}
       screenOptions={{
-        headerShown: false,
-        
+        headerStyle: {
+          backgroundColor: 'white',
+          shadowOpacity: 0,
+          elevation: 0,
+        },
+        headerTitleStyle: {
+          fontSize: 30,
+          paddingTop: 18,
+        },
+        cardStyle: { backgroundColor: '#fff' },
       }}
     >
-      <Stack.Screen name='Home' component={Home}
+      <Stack.Screen
+        name='Hello {glenn},'
+        component={Home}
+        options={{
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                size={28}
+                name='search'
+                color={colors.darkGreen}
+                style={{ margin: 16, marginTop: 40 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
       />
       <Stack.Screen name='MealDetails' component={MealDetails} />
     </Stack.Navigator>
@@ -61,8 +74,9 @@ export const FavoriteNavigator = () => {
   );
 };
 
-export const ExploreNavigator: React.FC<{ navigation: any, route: any }> = ({navigation}) => {
-
+export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
+  navigation,
+}) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -102,6 +116,32 @@ export const ProfileNavigator = () => {
     >
       <Stack.Screen name='Profile' component={Profile} />
       <Stack.Screen name='not' component={MealDetails} />
+    </Stack.Navigator>
+  );
+};
+
+export const LoginNavigator = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: 'white',
+          shadowOpacity: 0,
+          elevation: 0,
+        },
+        headerTitleStyle: {
+          fontSize: 30,
+          paddingTop: 18,
+        },
+        cardStyle: { backgroundColor: '#fff' },
+      }}
+    >
+      <Stack.Screen
+        name='Login'
+        component={Login}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name='Sign up' component={SignUp} />
     </Stack.Navigator>
   );
 };

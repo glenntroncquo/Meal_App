@@ -8,6 +8,7 @@ import { OptionsComponent } from '../../components/Home/OptionsComponent';
 
 
 const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
+  
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
 
   const date = new Date();

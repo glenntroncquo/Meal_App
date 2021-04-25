@@ -9,6 +9,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import firebase from '../utils/firebase';
 import { checkLogin } from '../utils/login';
+import { LoginNavigator } from './StackNavigator';
 
 const AuthStack = createStackNavigator();
 
@@ -20,9 +21,9 @@ export const Authentication = () => {
         headerShown: false,
       }}
     >
-      <AuthStack.Screen name='Loading' component={Loading} 
-      />
-      <AuthStack.Screen name='Login' component={Login} />
+      {/* <AuthStack.Screen name='Loading' component={Loading} 
+      /> */}
+      <AuthStack.Screen name='LoginNavigator' component={LoginNavigator} />
       <AuthStack.Screen
         name='BottomNavigator'
         component={BottomNavigator}

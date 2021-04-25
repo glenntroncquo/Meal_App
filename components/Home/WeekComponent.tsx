@@ -29,9 +29,7 @@ const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
       );
     else if (index === today) return new Date();
     else if (index > today)
-      return new Date(
-        new Date().setDate(new Date().getDate() + index - today)
-      );
+      return new Date(new Date().setDate(new Date().getDate() + index - today));
   });
 
   const arrDays = daysOfWeek.map((day: string, index: number) => {
@@ -70,7 +68,7 @@ const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
   return (
     <View>
       <Text style={[textStyles.semiBold, { marginBottom: -6, marginTop: 32 }]}>
-        {daysOfWeek2[dayIndex]} morning
+        {daysOfWeek2[dayIndex]}
       </Text>
       <View
         style={{

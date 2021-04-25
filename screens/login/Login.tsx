@@ -1,18 +1,10 @@
-import React, { useEffect, useState, version } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  Image,
-  Dimensions,
-} from 'react-native';
-import * as SplashScreen from 'expo-splash-screen';
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native';
 
 import firebase from '../../utils/firebase';
 import colors from '../../styles/colors';
 import { textStyles, textInputStyle, buttonStyle } from '../../styles/generics';
-import { checkLogin } from '../../utils/login';
+import { CustomButton } from '../../components/Login/CustomButton';
 
 export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [isFocusedEmail, setFocusEmail] = useState(false);
@@ -68,9 +60,17 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
         secureTextEntry={true}
       />
 
-      <TouchableOpacity style={buttonStyle.login} onPress={handleLogin}>
+      {/* <TouchableOpacity style={buttonStyle.login} onPress={handleLogin}>
         <Text style={{ color: '#FFFF' }}>LOGIN</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+
+      <CustomButton name='Login' customfunction={handleLogin} />
+
+      {/* <CustomButton name='Sign up' nav='Sign up' navigation={navigation} /> */}
+
+      {/* <TouchableOpacity style={buttonStyle.login} onPress={() => navigation.navigate('Sign up')}>
+        <Text style={{ color: '#FFFF' }}>LOGIN</Text>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         activeOpacity={0.7}
@@ -81,10 +81,11 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
           margin: 'auto',
           marginTop: 32,
         }}
+        onPress={()=> navigation.navigate('Sign up')}
       >
         <Text>Don't have an account yet? </Text>
         <Text style={{ color: colors.darkGreen }}>Sign up here</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> 
     </View>
   );
 };
