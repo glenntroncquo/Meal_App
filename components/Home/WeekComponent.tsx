@@ -10,7 +10,7 @@ interface Props {
 }
 
 const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
-  const today = new Date().getDay();
+  const today = new Date().getDay() - 1;
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
   const daysOfWeek2 = new Array(
     'Monday',

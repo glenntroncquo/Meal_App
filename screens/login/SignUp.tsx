@@ -6,7 +6,7 @@ import { CustomButton } from '../../components/Login/CustomButton';
 
 import firebase from '../../utils/firebase';
 
-export const SignUp: React.FC = () => {
+export const SignUp: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
@@ -16,26 +16,21 @@ export const SignUp: React.FC = () => {
 
   const handlePress = () => {
     if (password !== confirmation) setError('Wachtwoorden komen niet overeen');
-    //   else if(password.length <=8) setError('Minimaal 8 karakters')
     else {
       setError('');
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((result) => {
-          console.log(result);
+          navigation.replace('BottomNavigator');
         })
         .catch((error) => {
-          console.log(error);
-
           if (error.code.includes('auth/weak-password')) {
             setError('Please enter a stronger password');
-          } 
-          else if (error.code.includes('auth/email-already-in-use')) {
+          } else if (error.code.includes('auth/email-already-in-use')) {
             setError('Email in already in use');
             console.log(firebase.auth().currentUser);
-          } 
-          else {
+          } else {
             setError('Unable to register. Please try again');
           }
         });

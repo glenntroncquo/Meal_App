@@ -10,7 +10,7 @@ const Profile: React.FC<{navigation: any}> = ({navigation}) => {
             </Text>
 
             <TouchableOpacity
-            onPress={() => navigation.replace('Login')}
+            onPress={() => navigation.replace('LoginNavigator')}
             >
                 <Text>
                     Logout

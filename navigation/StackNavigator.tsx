@@ -10,7 +10,6 @@ import Favorite from '../screens/favorites/Favorite';
 import Profile from '../screens/profile/Profile';
 
 import colors from '../styles/colors';
-import { BottomNavigator } from './BottomNavigator';
 import { Login } from '../screens/login/Login';
 import { SignUp } from '../screens/login/SignUp';
 
