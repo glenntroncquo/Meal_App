@@ -1,113 +1,73 @@
-import React, { useState } from 'react';
-import { View, Text } from 'react-native';
-import { Image } from 'react-native-elements/dist/image/Image';
-import {
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native-gesture-handler';
-import { AntDesign } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
-import { fetchMeal } from '../../api/fetchMeal';
-import colors from '../../styles/colors';
+import { ResultComponent } from '../../components/Explore/ResultComponent';
 import { container } from '../../styles/generics';
+import { apiKey } from '../../api/details';
+import { Text } from 'react-native-elements';
+import colors from '../../styles/colors';
+import { View } from 'react-native';
 
 const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
-  const handleSearch = async (text: string) => {
-    fetchMeal(text);
+  const [searchData, setSearchData] = useState([]);
+  const [images, setImages] = useState([]);
+  const [names, setNames] = useState([]);
+  const [id, setId] = useState([]);
+
+  const handleSearch = async (searchQuery: string) => {
+    fetch(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${searchQuery}`
+    )
+      .then((res) => res.json())
+      .then((json) => setSearchData(json.results));
   };
 
-  const handlePress = () => {
-    navigation.navigate('MealDetail');
-  };
+  useEffect(() => {
+    setImages([]);
+    setNames([]);
+    setId([]);
+    searchData.forEach((item) => {
+      setImages((oldArr) => [...oldArr, item['image']]);
+      setNames((oldArr) => [...oldArr, item['title']]);
+      setId((oldArr) => [...oldArr, item['id']]);
+    });
+  }, [searchData]);
+
   return (
-    <ScrollView style={container.basicContainer}>
+    <ScrollView
+      style={{ margin: 16, marginBottom: 0 }}
+      showsVerticalScrollIndicator={false}
+    >
       <TextInput
         onChangeText={handleSearch}
-        style={{ borderWidth: 1, marginBottom: 0 }}
+        placeholder='Search'
+        placeholderTextColor='darkgray'
+        style={{
+          borderWidth: 1,
+          marginBottom: 8,
+          borderRadius: 8,
+          backgroundColor: colors.opacityGray,
+          height: 48,
+          color: 'black',
+          borderColor: 'white',
+          paddingLeft: 16,
+        }}
       />
 
-      <TouchableOpacity
-        style={{
-          marginTop:32,
-          // borderBottomWidth: 1,
-          borderBottomColor: 'lightgray',
-          flexDirection: 'row',
-          alignItems: 'center',
-          height: 72,
-          padding: 16,
-        }}
-      >
-        <Image
-          source={{
-            uri: 'https://spoonacular.com/recipeImages/511728-312x231.jpg',
-          }}
-          style={{ width: 64, height: 64, borderRadius: 50, marginRight: 16 }}
-        />
-        <Text style={{ fontSize: 16, color: 'black' }}>Chicken curry thai</Text>
+      {images.map((element, index) => {
+        return (
+          <ResultComponent
+            key={id[index]}
+            id={id[index]}
+            uri={images[index]}
+            name={names[index]}
+          />
+        );
+      })}
 
-        <AntDesign
-          name='right'
-          size={24}
-          color='darkgray'
-          style={{ paddingTop: 3, marginLeft: 'auto' }}
-        />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={{
-          // borderBottomWidth: 1,
-          borderBottomColor: 'lightgray',
-          flexDirection: 'row',
-          alignItems: 'center',
-          height: 72,
-          padding: 16,
-          marginTop: 16,
-          paddingBottom: 32,
-        }}
-      >
-        <Image
-          source={{
-            uri: 'https://spoonacular.com/recipeImages/511728-312x231.jpg',
-          }}
-          style={{ width: 64, height: 64, borderRadius: 50, marginRight: 16 }}
-        />
-        <Text style={{ fontSize: 16, color: 'black' }}>Chicken curry thai</Text>
-
-        <AntDesign
-          name='right'
-          size={24}
-          color='darkgray'
-          style={{ paddingTop: 3, marginLeft: 'auto' }}
-        />
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          // borderBottomWidth: 1,
-          borderBottomColor: 'lightgray',
-          flexDirection: 'row',
-          alignItems: 'center',
-          height: 72,
-          padding: 16,
-          marginTop: 16,
-          paddingBottom: 32,
-        }}
-      >
-        <Image
-          source={{
-            uri: 'https://spoonacular.com/recipeImages/511728-312x231.jpg',
-          }}
-          style={{ width: 64, height: 64, borderRadius: 50, marginRight: 16 }}
-        />
-        <Text style={{ fontSize: 16, color: 'black' }}>Chicken curry thai</Text>
-
-        <AntDesign
-          name='right'
-          size={24}
-          color='darkgray'
-          style={{ paddingTop: 3, marginLeft: 'auto' }}
-        />
-      </TouchableOpacity>
+      {searchData.map((item) => {
+        <Text>{item}</Text>;
+      })}
     </ScrollView>
   );
 };

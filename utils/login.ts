@@ -9,7 +9,7 @@ export const checkLogin: Function = async (navigation: any) => {
       navigation.replace('BottomNavigator');
       SplashScreen.hideAsync();
     } else {
-      navigation.navigate('Login');
+      navigation.replace('LoginNavigator');
       SplashScreen.hideAsync();
     }
   });

@@ -87,6 +87,7 @@ export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
         headerTitleStyle: {
           fontSize: 30,
           paddingTop: 18,
+          paddingBottom:0
         },
         cardStyle: { backgroundColor: '#fff' },
       }}
