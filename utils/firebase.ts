@@ -10,6 +10,8 @@ const firebaseConfig = {
   messagingSenderId: '896084811195',
   appId: '1:896084811195:web:68f2553906880656ca789e',
   measurementId: 'G-V69JGDGH5Y',
+  
+  databaseURL: "https://meal-app-91bb3-default-rtdb.europe-west1.firebasedatabase.app/"
 };
 
 

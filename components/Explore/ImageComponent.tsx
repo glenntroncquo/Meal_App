@@ -24,16 +24,6 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
     '',
   ]);
 
-  const [mealArr, setMealArr] = useState([
-    'Cookie',
-    'Nigga',
-    'though',
-    'milkyway',
-    'yhes',
-    'sheesh',
-    'jeez',
-  ]);
-
   const images = new Array(
     'images[dayIndex]',
     'https://spoonacular.com/recipeImages/637876-312x231.jpg',
@@ -46,16 +36,13 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
 
   return (
     <View style={{ marginBottom: 24 }}>
-      <TouchableOpacity activeOpacity={0.7} style={{}}>
         <ImageBackground
-          source={
-            imageArr[dayIndex] == ''
-              ? {
-                  uri:
-                    'https://spoonacular.com/recipeImages/665744-556x370.jpg',
-                }
-              : { uri: images[dayIndex] }
-          }
+        source={{
+
+            uri:'https://spoonacular.com/recipeImages/632502-556x370.jpg'
+        }
+        }
+          
           style={carouselStyle.image}
           imageStyle={{
             borderRadius: 0,
@@ -74,11 +61,10 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
             }}
           >
             <Text style={{ color: 'white', fontSize: 16 }}>
-              {mealArr[dayIndex]}
+              Patat met bonen met saucice en wortels
             </Text>
           </View>
         </ImageBackground>
-      </TouchableOpacity>
     </View>
   );
 };

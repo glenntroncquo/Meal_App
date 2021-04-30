@@ -18,9 +18,10 @@ const BottomNavigator: React.FC = () => {
     <Tab.Navigator
       initialRouteName='Home'
       tabBarOptions={{
-        activeTintColor: colors.white,
-        inactiveTintColor: '#D9D7D7',
-        style: { height: 58, backgroundColor: colors.darkGreen, },
+        activeTintColor: colors.darkGreen,
+        inactiveTintColor: 'black',
+        style:{height:58},
+        // style: { height: 58, backgroundColor: colors.normalPink, },
         labelStyle: {
           paddingBottom: 6,
           fontSize: 12,
@@ -46,7 +47,7 @@ const BottomNavigator: React.FC = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name='Favorites'
         component={FavoriteNavigator}
         options={{
@@ -54,7 +55,7 @@ const BottomNavigator: React.FC = () => {
             <Ionicons name='heart' size={24} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name='Profile'
         component={ProfileNavigator}

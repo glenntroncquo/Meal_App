@@ -1,11 +1,15 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AntDesign } from '@expo/vector-icons';
 
 import Explore from '../screens/explore/Explore';
 import Home from '../screens/home/Home';
-import MealDetails from '../screens/home/MealDetails';
+import MealDetails from '../screens/explore/MealDetail';
 import Favorite from '../screens/favorites/Favorite';
 import Profile from '../screens/profile/Profile';
 
@@ -87,13 +91,35 @@ export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
         headerTitleStyle: {
           fontSize: 30,
           paddingTop: 18,
-          paddingBottom:0
+          paddingBottom: 0,
         },
         cardStyle: { backgroundColor: '#fff' },
       }}
     >
       <Stack.Screen name='Explore' component={Explore} />
-      <Stack.Screen name='MealDetail' component={MealDetails} />
+      <Stack.Screen
+        name='Meal details'
+        component={MealDetails}
+        options={{
+          // headerShown:false,
+
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                navigation.pop();
+              }}
+            >
+              <AntDesign
+                name='arrowleft'
+                size={32}
+                color={colors.darkGreen}
+                style={{ marginLeft: 12, marginTop: 20 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -102,6 +128,7 @@ export const ProfileNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
+        // headerShown: false,
         headerStyle: {
           backgroundColor: 'white',
           shadowOpacity: 0,

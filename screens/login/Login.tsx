@@ -3,7 +3,7 @@ import { View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'reac
 
 import firebase from '../../utils/firebase';
 import colors from '../../styles/colors';
-import { textStyles, textInputStyle, buttonStyle } from '../../styles/generics';
+import { textStyles, textInputStyle } from '../../styles/generics';
 import { CustomButton } from '../../components/Login/CustomButton';
 
 export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -17,8 +17,14 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
+      .then((result) => {
         navigation.replace('BottomNavigator');
+        firebase
+        .database()
+        .ref('/users' + 'thetten')
+        .set({
+          gmail: 'thetten'
+        })
       })
       .catch(() => {
         console.log('Foute login');

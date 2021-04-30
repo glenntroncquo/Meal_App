@@ -9,12 +9,13 @@ interface Props {
   uri: string;
   name: string;
   id: number;
+  navigation?: any
 }
 
-export const ResultComponent: React.FC<Props> = ({ uri, name, id }) => {
+export const ResultComponent: React.FC<Props> = ({ uri, name, id, navigation }) => {
   const handlePress = (id: number) => {
-    console.log(id);
-    // navigation.navigate('MealDetail');
+    // console.log(id);
+    navigation.navigate('Meal details', {id: id});
   };
   return (
     <TouchableOpacity

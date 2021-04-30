@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+import { StatusBar } from 'expo-status-bar';
+import colors from '../../styles/colors';
+
 const Profile: React.FC<{navigation: any}> = ({navigation}) => {
     return(
-        <View>
+        <View style={{flex:1, marginTop:16}}>
             <Text>
                 Welcome to your profile!
             </Text>
@@ -16,6 +19,8 @@ const Profile: React.FC<{navigation: any}> = ({navigation}) => {
                     Logout
                 </Text>
             </TouchableOpacity>
+
+            {/* <StatusBar style='light' backgroundColor={colors.normalPink} /> */}
         </View>
     );
 }

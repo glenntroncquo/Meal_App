@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
+import { useIsFocused } from '@react-navigation/native';
 
 import { ResultComponent } from '../../components/Explore/ResultComponent';
-import { container } from '../../styles/generics';
 import { apiKey } from '../../api/details';
 import { Text } from 'react-native-elements';
 import colors from '../../styles/colors';
-import { View } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [searchData, setSearchData] = useState([]);
@@ -32,6 +32,8 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
       setId((oldArr) => [...oldArr, item['id']]);
     });
   }, [searchData]);
+
+  const IsFocused = useIsFocused();
 
   return (
     <ScrollView
@@ -61,6 +63,7 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
             id={id[index]}
             uri={images[index]}
             name={names[index]}
+            navigation={navigation}
           />
         );
       })}
@@ -68,6 +71,7 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
       {searchData.map((item) => {
         <Text>{item}</Text>;
       })}
+      {/* <StatusBar style='light' backgroundColor={colors.lightGray} /> */}
     </ScrollView>
   );
 };

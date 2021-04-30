@@ -8,4 +8,5 @@ export default  {
     opacityGreen: '#8AD3C6',
     opacityGray: '#D9D8D8',
     lightGray:'#707070',
+    normalPink:'#FE655B'
 }
