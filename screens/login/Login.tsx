@@ -1,5 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Dimensions,
+} from 'react-native';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Setting a timer']);
 
 import firebase from '../../utils/firebase';
 import colors from '../../styles/colors';
@@ -13,18 +24,23 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [email, setEmail] = useState('testuser@gmail.com');
   const [password, setPassword] = useState('admin123456');
 
-  const handleLogin = () => {
+  const setDb = async () => {
     firebase
+      .database()
+      .ref('/users' + 'thetten')
+      .set({
+        gmail: 'thetten',
+      });
+  };
+
+  const handleLogin = async () => {
+
+    await firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        navigation.replace('BottomNavigator');
-        firebase
-        .database()
-        .ref('/users' + 'thetten')
-        .set({
-          gmail: 'thetten'
-        })
+      .then(async (result) => {
+        await navigation.replace('BottomNavigator');
+        // await setDb();
       })
       .catch(() => {
         console.log('Foute login');
@@ -87,11 +103,11 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
           margin: 'auto',
           marginTop: 32,
         }}
-        onPress={()=> navigation.navigate('Sign up')}
+        onPress={() => navigation.navigate('Sign up')}
       >
         <Text>Don't have an account yet? </Text>
         <Text style={{ color: colors.darkGreen }}>Sign up here</Text>
-      </TouchableOpacity> 
+      </TouchableOpacity>
     </View>
   );
 };

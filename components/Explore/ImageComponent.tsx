@@ -6,42 +6,17 @@ import colors from '../../styles/colors';
 import { carouselStyle } from '../../styles/generics';
 
 interface Props {
-  activeDay: string;
   dayIndex: number;
+  uri: string
 }
 
-export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
+export const ImageComponent: React.FC<Props> = ({ dayIndex, uri }) => {
   useEffect(() => {}, [dayIndex]);
-
-  const screen = Dimensions.get('screen').width;
-  const [imageArr, setImageArr] = useState([
-    'https://spoonacular.com/recipeImages/665744-556x370.jpg',
-    'https://spoonacular.com/recipeImages/637876-312x231.jpg',
-    'https://spoonacular.com/recipeImages/646034-556x370.jpg',
-    'https://spoonacular.com/recipeImages/639031-556x370.jpg',
-    'https://spoonacular.com/recipeImages/642129-556x370.jpg',
-    'https://spoonacular.com/recipeImages/632502-556x370.jpg',
-    '',
-  ]);
-
-  const images = new Array(
-    'images[dayIndex]',
-    'https://spoonacular.com/recipeImages/637876-312x231.jpg',
-    'https://spoonacular.com/recipeImages/646034-556x370.jpg',
-    'https://spoonacular.com/recipeImages/639031-556x370.jpg',
-    'https://spoonacular.com/recipeImages/642129-556x370.jpg',
-    'https://spoonacular.com/recipeImages/632502-556x370.jpg',
-    ''
-  );
-
+  const image = { uri: uri}
   return (
     <View style={{ marginBottom: 24 }}>
         <ImageBackground
-        source={{
-
-            uri:'https://spoonacular.com/recipeImages/632502-556x370.jpg'
-        }
-        }
+        source={image}
           
           style={carouselStyle.image}
           imageStyle={{

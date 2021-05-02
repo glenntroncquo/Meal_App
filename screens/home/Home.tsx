@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { container, textStyles } from '../../styles/generics';
 
 import WeekComponent from '../../components/Home/WeekComponent';
@@ -20,7 +20,9 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
   };
   
   return (
-    <View style={container.homeContainer}>
+    <ScrollView style={container.homeContainer}
+    showsVerticalScrollIndicator={false}
+    >
       <Text style={[textStyles.normal]}>Your weekly overview</Text>
 
       <WeekComponent
@@ -36,7 +38,7 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
       <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>Explore</Text>
       <OptionsComponent />
       <OptionsComponent />
-    </View>
+    </ScrollView>
   );
 };
 

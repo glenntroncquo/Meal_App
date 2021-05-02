@@ -14,7 +14,6 @@ interface Props {
 
 export const ResultComponent: React.FC<Props> = ({ uri, name, id, navigation }) => {
   const handlePress = (id: number) => {
-    // console.log(id);
     navigation.navigate('Meal details', {id: id});
   };
   return (
