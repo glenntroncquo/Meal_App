@@ -6,15 +6,15 @@ import colors from '../../styles/colors';
 import { carouselStyle } from '../../styles/generics';
 
 interface Props {
-  dayIndex: number;
+  // dayIndex: number;
   uri: string
+  title: string
 }
 
-export const ImageComponent: React.FC<Props> = ({ dayIndex, uri }) => {
-  useEffect(() => {}, [dayIndex]);
+export const ImageComponent: React.FC<Props> = ({ title ,uri }) => {
   const image = { uri: uri}
   return (
-    <View style={{ marginBottom: 24 }}>
+    <View style={{ marginBottom: 24,  }}>
         <ImageBackground
         source={image}
           
@@ -23,6 +23,8 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, uri }) => {
             borderRadius: 0,
             borderBottomLeftRadius: 32,
             borderTopRightRadius: 32,
+            borderWidth:1,
+            borderColor: colors.darkGreen
           }}
         >
           <View
@@ -35,8 +37,7 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, uri }) => {
               borderBottomEndRadius: 0,
             }}
           >
-            <Text style={{ color: 'white', fontSize: 16 }}>
-              Patat met bonen met saucice en wortels
+            <Text style={{ color: 'white', fontSize: 16 }}>{title}
             </Text>
           </View>
         </ImageBackground>

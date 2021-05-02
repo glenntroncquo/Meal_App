@@ -11,7 +11,7 @@ export const IconComponent: React.FC<{
 }> = ({ state, handleSwitch }) => {
   return (
     <>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           handleSwitch(0);
         }}
@@ -32,22 +32,22 @@ export const IconComponent: React.FC<{
             Description
           </Text>
         </View>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         onPress={() => {
-          handleSwitch(1);
+          handleSwitch(0);
         }}
       >
         <View style={{ alignItems: 'center' }}>
           <MaterialIcons
             name='integration-instructions'
             size={24}
-            color={state === 1 ? colors.darkGreen : colors.opacityGray}
+            color={state === 0 ? colors.darkGreen : colors.opacityGray}
           />
           <Text
             style={
-              state === 1
+              state === 0
                 ? { color: colors.darkGreen }
                 : { color: colors.opacityGray }
             }
@@ -59,18 +59,18 @@ export const IconComponent: React.FC<{
 
       <TouchableOpacity
         onPress={() => {
-          handleSwitch(2);
+          handleSwitch(1);
         }}
       >
         <View style={{ alignItems: 'center' }}>
           <MaterialIcons
             name='restaurant-menu'
             size={24}
-            color={state === 2 ? colors.darkGreen : colors.opacityGray}
+            color={state === 1 ? colors.darkGreen : colors.opacityGray}
           />
           <Text
             style={
-              state === 2
+              state === 1
                 ? { color: colors.darkGreen }
                 : { color: colors.opacityGray }
             }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { container, textStyles } from '../../styles/generics';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import WeekComponent from '../../components/Home/WeekComponent';
 import { ImageComponent } from '../../components/Home/ImageComponent';
 import { OptionsComponent } from '../../components/Home/OptionsComponent';
@@ -18,6 +20,16 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
   const handleClick = (selectedDay: number) => {
     setDayIndex(selectedDay);
   };
+
+  let value;
+  // const get = async () => {
+    
+  //   // await AsyncStorage.setItem('test', 'nigger');
+  //   value = await AsyncStorage.getItem('test');
+  //   console.log(value)
+
+  // };
+  // get();
   
   return (
     <ScrollView style={container.homeContainer}

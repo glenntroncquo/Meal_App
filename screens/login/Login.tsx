@@ -82,17 +82,8 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
         secureTextEntry={true}
       />
 
-      {/* <TouchableOpacity style={buttonStyle.login} onPress={handleLogin}>
-        <Text style={{ color: '#FFFF' }}>LOGIN</Text>
-      </TouchableOpacity> */}
 
       <CustomButton name='Login' customfunction={handleLogin} />
-
-      {/* <CustomButton name='Sign up' nav='Sign up' navigation={navigation} /> */}
-
-      {/* <TouchableOpacity style={buttonStyle.login} onPress={() => navigation.navigate('Sign up')}>
-        <Text style={{ color: '#FFFF' }}>LOGIN</Text>
-      </TouchableOpacity> */}
 
       <TouchableOpacity
         activeOpacity={0.7}
