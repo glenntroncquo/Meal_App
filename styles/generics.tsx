@@ -62,39 +62,6 @@ export const navigationStyle = StyleSheet.create({
   },
 });
 
-//WEEKDAY STYLE
-export const calendarStyle = StyleSheet.create({
-  activeDay: {
-    backgroundColor: colors.lightGreen,
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 70,
-    minWidth: 50,
-    maxWidth: 50,
-  },
-  inactiveDay: {
-    backgroundColor: 'white',
-    borderRadius: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minWidth: 50,
-    maxWidth: 50,
-  },
-});
-
-// CAROUSSEL STYLING
-
-export const carouselStyle = StyleSheet.create({
-  image: {
-    width: Dimensions.get('screen').width - 32,
-    height: 160,
-    borderRadius: 32,
-    paddingBottom: 0,
-    flexDirection: 'row',
-  },
-});
-
 // SEARCHBAR STYLING
 
 export const searchBar = StyleSheet.create({
@@ -132,25 +99,5 @@ export const textInputStyle = StyleSheet.create({
     marginBottom:16,
   },
 });
-
-// LOGINBUTTON, PASSWORD
-export const buttonStyle = StyleSheet.create({
-  login: {
-    marginTop:32,
-    backgroundColor: colors.normalGreen,
-    width: Dimensions.get('screen').width-64,
-    height:54,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:100,
-  },
-
-  forgotPassword: {
-    flex:1,
-    // justifyContent:'flex-end',
-    // alignItems:'flex-end'
-  }
-})
-
 
 export default styles;

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, ImageBackground, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import colors from '../../styles/colors';
-
-import { carouselStyle } from '../../styles/generics';
+import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 interface Props {
   // dayIndex: number;
@@ -18,7 +17,7 @@ export const ImageComponent: React.FC<Props> = ({ title ,uri }) => {
         <ImageBackground
         source={image}
           
-          style={carouselStyle.image}
+          style={Homestylesheet.image}
           imageStyle={{
             borderRadius: 0,
             borderBottomLeftRadius: 32,

@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, ScrollView } from 'react-native';
 import { container, textStyles } from '../../styles/generics';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import firebase, { auth } from '../../utils/firebase';
 
 import WeekComponent from '../../components/Home/WeekComponent';
 import { ImageComponent } from '../../components/Home/ImageComponent';
 import { OptionsComponent } from '../../components/Home/OptionsComponent';
+import { week } from '../../utils/week';
+import { RandomComponent } from '../../components/Home/RandomComponent';
 
 const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
@@ -21,14 +24,18 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
     setDayIndex(selectedDay);
   };
 
-  // const get = async () => {
+  useEffect(() => {
+    let week;
+    firebase
+      .database()
+      .ref('/user/' + auth.currentUser?.uid + '/week')
+      .on('value', (snapshot) => {
+        week = snapshot;
+      });
+      // console.log(week);
 
-  //   // await AsyncStorage.setItem('test', 'nigger');
-  //   value = await AsyncStorage.getItem('test');
-  //   console.log(value)
-
-  // };
-  // get();
+    // AsyncStorage.setItem('calendar', JSON.stringify(week));
+  }, []);
 
   const checkWeek = async () => {
     let now = new Date();
@@ -36,12 +43,7 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
     let week = Math.ceil(
       ((now.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7
     );
-
-    // const value = await AsyncStorage.getItem('week');
-    // console.log(value)
   };
-
-  checkWeek();
 
   return (
     <ScrollView
@@ -56,10 +58,13 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
         dayOfMonth={dayOfMonth}
       />
 
-      <ImageComponent activeDay={daysOfWeek[dayIndex]} dayIndex={dayIndex} navigation={navigation}/>
-      <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>Explore</Text>
-      <OptionsComponent />
-      <OptionsComponent />
+      <ImageComponent
+        dayIndex={dayIndex}
+        navigation={navigation}
+      />
+      <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>Random Meals</Text>
+
+      <RandomComponent navigation={navigation}/>
     </ScrollView>
   );
 };

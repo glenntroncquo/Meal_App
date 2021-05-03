@@ -21,9 +21,6 @@ export const SignUp: React.FC<{ navigation: any }> = ({ navigation }) => {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then((result) => {
-          navigation.replace('BottomNavigator');
-        })
         .catch((error) => {
           if (error.code.includes('auth/weak-password')) {
             setError('Please enter a stronger password');

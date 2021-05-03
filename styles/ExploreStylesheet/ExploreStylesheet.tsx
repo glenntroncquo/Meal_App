@@ -27,21 +27,32 @@ export const modalView = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop:32
+    marginTop: 32,
   },
-//   buttonOpen: {
-//     backgroundColor: '#F194FF',
-//   },
-//   buttonClose: {
-//     backgroundColor: '#2196F3',
-//   },
-//   textStyle: {
-//     color: 'white',
-//     fontWeight: 'bold',
-//     textAlign: 'center',
-//   },
-//   modalText: {
-//     marginBottom: 15,
-//     textAlign: 'center',
-//   },
+});
+
+export const ExploreStylesheet = StyleSheet.create({
+  textInputStyle: {
+    borderWidth: 1,
+    marginBottom: 8,
+    borderRadius: 8,
+    backgroundColor: colors.opacityGray,
+    height: 48,
+    color: 'black',
+    borderColor: 'white',
+    paddingLeft: 16,
+  },
+
+  mealDetailView: {
+    borderColor: colors.opacityGray,
+    borderBottomWidth: 1,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    paddingBottom: 8,
+  },
+  buttonView: {
+    marginBottom: 32,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
 });

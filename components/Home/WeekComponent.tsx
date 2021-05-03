@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
+import { textStyles } from '../../styles/generics';
 
-import { calendarStyle, textStyles } from '../../styles/generics';
+import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 interface Props {
   dayIndex: number;
@@ -38,8 +39,8 @@ const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
         key={day}
         style={
           day === daysOfWeek[dayIndex]
-            ? calendarStyle.activeDay
-            : calendarStyle.inactiveDay
+            ? Homestylesheet.activeDay
+            : Homestylesheet.inactiveDay
         }
         activeOpacity={0.7}
         onPress={() => handleClick(daysOfWeek.indexOf(day))}
@@ -70,19 +71,7 @@ const WeekComponent: React.FC<Props> = ({ dayIndex, handleClick }) => {
       <Text style={[textStyles.semiBold, { marginBottom: -6, marginTop: 32 }]}>
         {daysOfWeek2[dayIndex]}
       </Text>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          marginRight: 4,
-          marginLeft: 4,
-          marginTop: 8,
-          marginBottom: 16,
-        }}
-      >
-        {arrDays}
-      </View>
+      <View style={Homestylesheet.week}>{arrDays}</View>
     </View>
   );
 };

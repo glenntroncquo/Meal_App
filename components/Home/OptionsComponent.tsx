@@ -3,33 +3,29 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
 import colors from '../../styles/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 export const OptionsComponent: React.FC = () => {
   return (
-    <View style={{ flexDirection: 'row', justifyContent:'space-around', marginBottom:16}}>
-      <Option iconName='food-croissant' />
-      <Option iconName='food-croissant' />
-      <Option iconName='food-croissant' />
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        marginBottom: 16,
+      }}
+    >
+      <Option iconName='food-croissant' searchTerm={'fastfood'} />
+      <Option iconName='food-croissant' searchTerm={'fastfood'}/>
+      <Option iconName='food-croissant' searchTerm={'fastfood'}/>
     </View>
   );
 };
 
-interface OptionProps {}
-
-const Option: React.FC<{ iconName: any }> = ({ iconName }) => {
+const Option: React.FC<{ iconName: any, searchTerm: string }> = ({ iconName, searchTerm }) => {
   return (
-    <TouchableOpacity style={{alignItems:'center'}}>
+    <TouchableOpacity style={{ alignItems: 'center' }}>
       <View
-        style={{
-          width: 70,
-          height: 70,
-          backgroundColor: colors.opacityGreen,
-          borderRadius: 100,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginLeft: 16,
-          marginRight: 16,
-        }}
+        style={Homestylesheet.optionStyle}
       >
         <MaterialCommunityIcons
           name={iconName}
@@ -37,7 +33,7 @@ const Option: React.FC<{ iconName: any }> = ({ iconName }) => {
           color={colors.darkGreen}
         />
       </View>
-        <Text style={{color: colors.darkGreen, marginTop:8}}>fastfood</Text>
+      <Text style={{ color: colors.darkGreen, marginTop: 8 }}>fastfood</Text>
     </TouchableOpacity>
   );
 };

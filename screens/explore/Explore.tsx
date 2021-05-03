@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useIsFocused } from '@react-navigation/native';
 
 import { ResultComponent } from '../../components/Explore/ResultComponent';
 import { apiKey } from '../../api/details';
 import { Text } from 'react-native-elements';
-import colors from '../../styles/colors';
-import { StatusBar } from 'expo-status-bar';
+import { ExploreStylesheet } from '../../styles/ExploreStylesheet/ExploreStylesheet';
 
 const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
   const [searchData, setSearchData] = useState([]);
@@ -31,10 +29,7 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
       setNames((oldArr) => [...oldArr, item['title']]);
       setId((oldArr) => [...oldArr, item['id']]);
     });
-    
   }, [searchData]);
-
-  const IsFocused = useIsFocused();
 
   return (
     <ScrollView
@@ -45,16 +40,7 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
         onChangeText={handleSearch}
         placeholder='Search'
         placeholderTextColor='darkgray'
-        style={{
-          borderWidth: 1,
-          marginBottom: 8,
-          borderRadius: 8,
-          backgroundColor: colors.opacityGray,
-          height: 48,
-          color: 'black',
-          borderColor: 'white',
-          paddingLeft: 16,
-        }}
+        style={ExploreStylesheet.textInputStyle}
       />
 
       {images.map((element, index) => {
@@ -72,7 +58,6 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
       {searchData.map((item) => {
         <Text>{item}</Text>;
       })}
-      {/* <StatusBar style='light' backgroundColor={colors.lightGray} /> */}
     </ScrollView>
   );
 };

@@ -18,7 +18,9 @@ export const Authentication = () => {
     >
       <AuthStack.Screen name='Loading' component={Loading} 
       />
+      
       <AuthStack.Screen name='LoginNavigator' component={LoginNavigator} />
+
       <AuthStack.Screen
         name='BottomNavigator'
         component={BottomNavigator}

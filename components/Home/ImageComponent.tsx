@@ -1,19 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
-import { Dimensions, ImageBackground, Text, View } from 'react-native';
+import { ImageBackground, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import colors from '../../styles/colors';
 
-import { carouselStyle } from '../../styles/generics';
+import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 interface Props {
-  activeDay: string;
   dayIndex: number;
   navigation: any;
 }
 
 export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
-  const [mealArr, setMealArr] = useState([
+  const [titleArr, setTitleArr] = useState([
     'Nothing yet',
     'Nothing Yet',
     'Nothing Yet',
@@ -33,34 +31,41 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
     'https://plchldr.co/i/300x300?bg=FFFFFF',
   ]);
 
-  const [id, setId] = useState<number[]>([]);
+  const [idArr, setIdArr] = useState([
+    999999,
+    999999,
+    999999,
+    999999,
+    999999,
+    999999,
+    999999,
+  ]);
 
   const getDayItems = async () => {
     //@ts-ignore
-    // const weekdata = JSON.parse(await AsyncStorage.getItem('calendar'));
-
-    // setImageArr([])
-
-    // weekdata.forEach((item: any) => {
-    //   // console.log(item['image'])
-    //   setImageArr(prevArr => [...prevArr, item['image']]);
-    //   setMealArr(prevArr => [...prevArr, item['name']]);
-    //   setId(prevArr => [...prevArr, item['id']]);
-    // });
-
-    console.log(imageArr)
+    const weekdata = JSON.parse(await AsyncStorage.getItem('calendar'));
+    setImageArr([]);
+    setIdArr([]);
+    setTitleArr([]);
+    for (let i = 0; i <= 6; i++) {
+      setImageArr((prevArr) => [...prevArr, weekdata[i.toString()]['image']]);
+      setTitleArr((prevArr) => [...prevArr, weekdata[i.toString()]['name']]);
+      setIdArr((prevArr) => [...prevArr, weekdata[i.toString()]['id']]);
+    }
   };
 
   useEffect(() => {
-    console.log('rerender')
-    const test = getDayItems();
-    
-  }, []);
+    const unsubscribe = navigation.addListener('focus', () => {
+      getDayItems();
+    });
+    // Return the function to unsubscribe from the event so it gets removed on unmount
+    return unsubscribe;
+  }, [navigation]);
 
   const handlePress = (dayIndex: number) => {
-    if (mealArr[dayIndex] === 'Click to add a meal' || mealArr[dayIndex] === 'Nothing yet')
+    if (titleArr[dayIndex] === 'Click to add meal')
       navigation.navigate('ExploreTab');
-    else navigation.navigate('Meal details', { id: 654991 });
+    else navigation.navigate('Meal details', { id: idArr[dayIndex] });
   };
   return (
     <View style={{ marginBottom: 24 }}>
@@ -78,25 +83,12 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
                 }
               : { uri: imageArr[dayIndex] }
           }
-          style={carouselStyle.image}
-          imageStyle={{
-            borderRadius: 0,
-            borderBottomLeftRadius: 32,
-            borderTopRightRadius: 32,
-          }}
+          style={Homestylesheet.image}
+          imageStyle={Homestylesheet.imageStyle}
         >
-          <View
-            style={{
-              backgroundColor: colors.darkGreen,
-              alignSelf: 'flex-end',
-              padding: 16,
-              borderRadius: 32,
-              borderTopLeftRadius: 0,
-              borderBottomEndRadius: 0,
-            }}
-          >
+          <View style={Homestylesheet.view}>
             <Text style={{ color: 'white', fontSize: 16 }}>
-              {mealArr[dayIndex]}
+              {titleArr[dayIndex]}
             </Text>
           </View>
         </ImageBackground>

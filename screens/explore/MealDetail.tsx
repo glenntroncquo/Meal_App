@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Modal } from 'react-native';
+import { View } from 'react-native';
 import { apiKey } from '../../api/details';
-import 'firebase/database';
-import 'firebase/auth';
 import colors from '../../styles/colors';
 import { ImageComponent } from '../../components/Explore/ImageComponent';
 import { container } from '../../styles/generics';
@@ -14,8 +12,10 @@ import { InstructionComponent } from '../../components/Explore/InstructionCompon
 import { Activity } from '../../components/General/Activity';
 import { CustomButton } from '../../components/Login/CustomButton';
 import { IngredientComponent } from '../../components/Explore/IngredientComponent';
-import { Text } from 'react-native-elements';
 import { ModalComponent } from '../../components/Explore/ModalComponent/ModalComponent';
+
+import firebase, { auth } from '../../utils/firebase';
+import { ExploreStylesheet } from '../../styles/ExploreStylesheet/ExploreStylesheet';
 
 interface Meal {
   steps: [''];
@@ -116,25 +116,36 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   };
 
   const handlePressDay = (day: number) => {
-    console.log(day);
     setActive(!active);
-    // setActiveDay(day);
+    setActiveDay(day);
   };
+  const setDataDay: Function = async () => {
+    //@ts-ignore
+    const weekdata = JSON.parse(await AsyncStorage.getItem('calendar'));
+
+    if (activeDay != null) {
+      weekdata[activeDay]['id'] = id;
+      weekdata[activeDay]['image'] = imageMeal;
+      weekdata[activeDay]['name'] = title;
+
+      await AsyncStorage.setItem('calendar', JSON.stringify(weekdata));
+      await firebase
+        .database()
+        .ref('/user/' + auth.currentUser?.uid + '/week')
+        .set(weekdata);
+    }
+    activeDay != null ? console.log(weekdata) : null;
+  };
+  useEffect(() => {
+    setDataDay();
+  }, [activeDay]);
 
   return (
     <>
       {loaded ? (
         <ScrollView style={[container.basicContainer]}>
           <ImageComponent uri={imageMeal} title={title} />
-          <View
-            style={{
-              borderColor: colors.opacityGray,
-              borderBottomWidth: 1,
-              justifyContent: 'space-around',
-              flexDirection: 'row',
-              paddingBottom: 8,
-            }}
-          >
+          <View style={ExploreStylesheet.mealDetailView}>
             <IconComponent state={activeState} handleSwitch={handleSwitch} />
           </View>
           {activeState === 0 ? (
@@ -163,18 +174,16 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
               })}
             </View>
           )}
-          <View
-            style={{
-              marginBottom: 32,
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}
-          >
+          <View style={ExploreStylesheet.buttonView}>
             <CustomButton
               name='Add to calendar'
               customfunction={handleCalendarButton}
             />
-            <ModalComponent active={active} handlePress={handleCalendarButton} handleDay={handlePressDay}/>
+            <ModalComponent
+              active={active}
+              handlePress={handleCalendarButton}
+              handleDay={handlePressDay}
+            />
           </View>
         </ScrollView>
       ) : (
