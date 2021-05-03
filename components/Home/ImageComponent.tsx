@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, ImageBackground, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -8,45 +9,66 @@ import { carouselStyle } from '../../styles/generics';
 interface Props {
   activeDay: string;
   dayIndex: number;
+  navigation: any;
 }
 
-export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
-  useEffect(() => {}, [dayIndex]);
-
-  const screen = Dimensions.get('screen').width;
-  const [imageArr, setImageArr] = useState([
-    'https://spoonacular.com/recipeImages/665744-556x370.jpg',
-    'https://spoonacular.com/recipeImages/637876-312x231.jpg',
-    'https://spoonacular.com/recipeImages/646034-556x370.jpg',
-    'https://spoonacular.com/recipeImages/639031-556x370.jpg',
-    'https://spoonacular.com/recipeImages/642129-556x370.jpg',
-    'https://spoonacular.com/recipeImages/632502-556x370.jpg',
-    '',
-  ]);
-
+export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
   const [mealArr, setMealArr] = useState([
-    'Cookie',
-    'Nigga',
-    'though',
-    'milkyway',
-    'yhes',
-    'sheesh',
-    'jeez',
+    'Nothing yet',
+    'Nothing Yet',
+    'Nothing Yet',
+    'Nothing Yet',
+    'Nothing Yet',
+    'Nothing Yet',
+    'Nothing Yet',
   ]);
 
-  const images = new Array(
-    'images[dayIndex]',
-    'https://spoonacular.com/recipeImages/637876-312x231.jpg',
-    'https://spoonacular.com/recipeImages/646034-556x370.jpg',
-    'https://spoonacular.com/recipeImages/639031-556x370.jpg',
-    'https://spoonacular.com/recipeImages/642129-556x370.jpg',
-    'https://spoonacular.com/recipeImages/632502-556x370.jpg',
-    ''
-  );
+  const [imageArr, setImageArr] = useState([
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+    'https://plchldr.co/i/300x300?bg=FFFFFF',
+  ]);
 
+  const [id, setId] = useState<number[]>([]);
+
+  const getDayItems = async () => {
+    //@ts-ignore
+    // const weekdata = JSON.parse(await AsyncStorage.getItem('calendar'));
+
+    // setImageArr([])
+
+    // weekdata.forEach((item: any) => {
+    //   // console.log(item['image'])
+    //   setImageArr(prevArr => [...prevArr, item['image']]);
+    //   setMealArr(prevArr => [...prevArr, item['name']]);
+    //   setId(prevArr => [...prevArr, item['id']]);
+    // });
+
+    console.log(imageArr)
+  };
+
+  useEffect(() => {
+    console.log('rerender')
+    const test = getDayItems();
+    
+  }, []);
+
+  const handlePress = (dayIndex: number) => {
+    if (mealArr[dayIndex] === 'Click to add a meal' || mealArr[dayIndex] === 'Nothing yet')
+      navigation.navigate('ExploreTab');
+    else navigation.navigate('Meal details', { id: 654991 });
+  };
   return (
     <View style={{ marginBottom: 24 }}>
-      <TouchableOpacity activeOpacity={0.7} style={{}}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{}}
+        onPress={() => handlePress(dayIndex)}
+      >
         <ImageBackground
           source={
             imageArr[dayIndex] == ''
@@ -54,7 +76,7 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex }) => {
                   uri:
                     'https://spoonacular.com/recipeImages/665744-556x370.jpg',
                 }
-              : { uri: images[dayIndex] }
+              : { uri: imageArr[dayIndex] }
           }
           style={carouselStyle.image}
           imageStyle={{

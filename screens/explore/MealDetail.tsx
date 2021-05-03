@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { TextComponent, View } from 'react-native';
-import { Text } from 'react-native-elements';
+import { View, Modal } from 'react-native';
 import { apiKey } from '../../api/details';
-import firebase from '../../utils/firebase';
 import 'firebase/database';
 import 'firebase/auth';
 import colors from '../../styles/colors';
@@ -11,11 +9,13 @@ import { container } from '../../styles/generics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { IconComponent } from '../../components/Explore/IconComponent';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import { InstructionComponent } from '../../components/Explore/InstructionComponent';
 import { Activity } from '../../components/General/Activity';
 import { CustomButton } from '../../components/Login/CustomButton';
 import { IngredientComponent } from '../../components/Explore/IngredientComponent';
+import { Text } from 'react-native-elements';
+import { ModalComponent } from '../../components/Explore/ModalComponent/ModalComponent';
 
 interface Meal {
   steps: [''];
@@ -34,6 +34,8 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   const { id } = route.params;
 
   const [activeState, setActiveState] = useState(0);
+  const [active, setActive] = useState<boolean>(false);
+  const [activeDay, setActiveDay] = useState<number>();
 
   const [ingredientName, setIngredientName] = useState<Meal['ingredientName']>([
     '',
@@ -103,29 +105,20 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   useEffect(() => {
     setLoaded(true);
     setAsync();
-
-    // console.log(ingredientName)
-    // console.log(ingredientImage)
-    // console.log(ingredientAmount);
   }, [imageMeal]);
 
   const handleSwitch = (state: number) => {
     setActiveState(state);
   };
 
-  // const handlePress = async () => {
-  //   // console.log(firebase.auth().currentUser);
-  //   let uid = firebase.auth().currentUser?.uid;
-  //   let database = firebase.database();
+  const handleCalendarButton = () => {
+    setActive(!active);
+  };
 
-  //   await database.ref('tetten/' + uid).set({
-  //     id: 68,
-  //     naam: 'tetten',
-  //   });
-  // };
-
-  const handleCalendar = () => {
-    console.log('');
+  const handlePressDay = (day: number) => {
+    console.log(day);
+    setActive(!active);
+    // setActiveDay(day);
   };
 
   return (
@@ -177,7 +170,11 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
               justifyContent: 'center',
             }}
           >
-            <CustomButton name='Add to calendar' customfunction={handleCalendar} />
+            <CustomButton
+              name='Add to calendar'
+              customfunction={handleCalendarButton}
+            />
+            <ModalComponent active={active} handlePress={handleCalendarButton} handleDay={handlePressDay}/>
           </View>
         </ScrollView>
       ) : (

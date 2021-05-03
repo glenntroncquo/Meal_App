@@ -30,7 +30,7 @@ const BottomNavigator: React.FC = () => {
       }}
     >
       <Tab.Screen
-        name='Home'
+        name='HomeTab'
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -39,7 +39,7 @@ const BottomNavigator: React.FC = () => {
         }}
       />
       <Tab.Screen
-        name='Explore'
+        name='ExploreTab'
         component={ExploreNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -57,7 +57,7 @@ const BottomNavigator: React.FC = () => {
         }}
       /> */}
       <Tab.Screen
-        name='Profile'
+        name='ProfileTab'
         component={ProfileNavigator}
         
         options={{

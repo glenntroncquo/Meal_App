@@ -43,6 +43,16 @@ export const container = StyleSheet.create({
   },
 });
 
+// Centered view
+export const centeredStyle = StyleSheet.create({
+  centeredView : {
+    flex: 1,
+    marginTop: 1280,
+    justifyContent:'center',
+    alignItems:'center'
+  }
+});
+
 //NAVIGATION STYLING
 export const navigationStyle = StyleSheet.create({
   header: {

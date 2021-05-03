@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  createStackNavigator,
-  HeaderBackButton,
-} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AntDesign } from '@expo/vector-icons';
@@ -19,7 +16,8 @@ import { SignUp } from '../screens/login/SignUp';
 
 const Stack = createStackNavigator();
 
-export const HomeNavigator = () => {
+export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({ navigation, route}) => {
+  const name = 'Glenn';
   return (
     <Stack.Navigator
       screenOptions={{
@@ -36,7 +34,7 @@ export const HomeNavigator = () => {
       }}
     >
       <Stack.Screen
-        name='Hello {glenn},'
+        name={`Hello ${name}`}
         component={Home}
         options={{
           headerRight: () => (
@@ -51,7 +49,28 @@ export const HomeNavigator = () => {
           ),
         }}
       />
-      <Stack.Screen name='MealDetails' component={MealDetails} />
+      <Stack.Screen name='Explore' component={Explore} />
+      <Stack.Screen
+        name='Meal details'
+        component={MealDetails}
+        options={{
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                navigation.pop();
+              }}
+            >
+              <AntDesign
+                name='arrowleft'
+                size={32}
+                color={colors.darkGreen}
+                style={{ marginLeft: 12, marginTop: 20 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -101,8 +120,6 @@ export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
         name='Meal details'
         component={MealDetails}
         options={{
-          // headerShown:false,
-
           headerLeft: (props) => (
             <TouchableOpacity
               activeOpacity={1}

@@ -31,6 +31,7 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
       setNames((oldArr) => [...oldArr, item['title']]);
       setId((oldArr) => [...oldArr, item['id']]);
     });
+    
   }, [searchData]);
 
   const IsFocused = useIsFocused();

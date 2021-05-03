@@ -21,19 +21,32 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
     setDayIndex(selectedDay);
   };
 
-  let value;
   // const get = async () => {
-    
+
   //   // await AsyncStorage.setItem('test', 'nigger');
   //   value = await AsyncStorage.getItem('test');
   //   console.log(value)
 
   // };
   // get();
-  
+
+  const checkWeek = async () => {
+    let now = new Date();
+    let onejan = new Date(now.getFullYear(), 0, 1);
+    let week = Math.ceil(
+      ((now.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7
+    );
+
+    // const value = await AsyncStorage.getItem('week');
+    // console.log(value)
+  };
+
+  checkWeek();
+
   return (
-    <ScrollView style={container.homeContainer}
-    showsVerticalScrollIndicator={false}
+    <ScrollView
+      style={container.homeContainer}
+      showsVerticalScrollIndicator={false}
     >
       <Text style={[textStyles.normal]}>Your weekly overview</Text>
 
@@ -43,10 +56,7 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
         dayOfMonth={dayOfMonth}
       />
 
-      <ImageComponent
-        activeDay={daysOfWeek[dayIndex]}
-        dayIndex={dayIndex}
-      />
+      <ImageComponent activeDay={daysOfWeek[dayIndex]} dayIndex={dayIndex} navigation={navigation}/>
       <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>Explore</Text>
       <OptionsComponent />
       <OptionsComponent />
