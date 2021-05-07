@@ -1,28 +1,37 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image } from 'react-native-elements/dist/image/Image';
 
-import { StatusBar } from 'expo-status-bar';
 import colors from '../../styles/colors';
+import { textStyles } from '../../styles/generics';
+import { LoginStyle } from '../../styles/LoginStylesheet/LoginStyle';
+import { CustomButton } from '../../components/Login/CustomButton';
 
-const Profile: React.FC<{navigation: any}> = ({navigation}) => {
-    return(
-        <View style={{flex:1, marginTop:16}}>
-            <Text>
-                Welcome to your profile!
-            </Text>
+import firebase, { auth } from '../../utils/firebase';
 
-            <TouchableOpacity
-            onPress={() => navigation.replace('LoginNavigator')}
-            >
-                <Text>
-                    Logout
-                </Text>
-            </TouchableOpacity>
+const Profile: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const handleSignOut = () => {
+    firebase.auth().signOut();
+  };
+  return (
+    <View style={LoginStyle.container}>
+      <Image
+        source={require('../../assets/logo-meal.png')}
+        style={LoginStyle.image}
+      />
 
-            {/* <StatusBar style='light' backgroundColor={colors.normalPink} /> */}
-        </View>
-    );
-}
+      <Text
+        style={[
+          textStyles.header,
+          { color: colors.normalGreen, marginBottom: 32 },
+        ]}
+      >
+        Meal App
+      </Text>
+
+      <CustomButton name='Logout' customfunction={handleSignOut} />
+    </View>
+  );
+};
 
 export default Profile;

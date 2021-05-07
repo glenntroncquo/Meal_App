@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Alert, Modal, StyleSheet, Text, Pressable, View } from 'react-native';
+import React from 'react';
+import { Modal, Text, Pressable, View } from 'react-native';
+
 import { WeekChoice } from './WeekChoice';
 import { modalView } from '../../../styles/ExploreStylesheet/ExploreStylesheet';
 

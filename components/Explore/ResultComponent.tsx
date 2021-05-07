@@ -9,12 +9,17 @@ interface Props {
   uri: string;
   name: string;
   id: number;
-  navigation?: any
+  navigation?: any;
 }
 
-export const ResultComponent: React.FC<Props> = ({ uri, name, id, navigation }) => {
-  const handlePress = (id: number) => {
-    navigation.navigate('Meal details', {id: id});
+export const ResultComponent: React.FC<Props> = ({
+  uri,
+  name,
+  id,
+  navigation,
+}) => {
+  const handlePress = (id: number, name: string, uri: string) => {
+    navigation.navigate('Meal details', { id: id, name: name, uri: uri });
   };
   return (
     <TouchableOpacity
@@ -24,10 +29,8 @@ export const ResultComponent: React.FC<Props> = ({ uri, name, id, navigation }) 
         borderBottomColor: 'lightgray',
         flexDirection: 'row',
         alignItems: 'center',
-        height: 72,
-        padding: 16,
       }}
-      onPress={() => handlePress(id)}
+      onPress={() => handlePress(id, name, uri)}
     >
       <Image
         source={{

@@ -1,6 +1,7 @@
-import React, { useState, version } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import React from 'react';
+import { View } from 'react-native';
 import { Text } from 'react-native-elements';
+
 import { textStyles } from '../../../styles/generics';
 import { WeekDay } from './WeekDay';
 

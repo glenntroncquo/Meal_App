@@ -16,7 +16,10 @@ import { SignUp } from '../screens/login/SignUp';
 
 const Stack = createStackNavigator();
 
-export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({ navigation, route}) => {
+export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({
+  navigation,
+  route,
+}) => {
   const name = 'Glenn';
   return (
     <Stack.Navigator
@@ -34,11 +37,13 @@ export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({ navig
       }}
     >
       <Stack.Screen
-        name={`Hello ${name}`}
+        name='Home'
         component={Home}
         options={{
           headerRight: () => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Explore Meals')}
+            >
               <Ionicons
                 size={28}
                 name='search'
@@ -49,7 +54,7 @@ export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({ navig
           ),
         }}
       />
-      <Stack.Screen name='Explore' component={Explore} />
+      <Stack.Screen name='Explore Meals' component={Explore} />
       <Stack.Screen
         name='Meal details'
         component={MealDetails}
@@ -75,7 +80,9 @@ export const HomeNavigator: React.FC<{ navigation: any; route: any }> = ({ navig
   );
 };
 
-export const FavoriteNavigator = () => {
+export const FavoriteNavigator: React.FC<{ navigation: any }> = ({
+  navigation,
+}) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -92,12 +99,34 @@ export const FavoriteNavigator = () => {
       }}
     >
       <Stack.Screen name='Favorites' component={Favorite} />
+      <Stack.Screen
+        name='Meal details'
+        component={MealDetails}
+        options={{
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                navigation.pop();
+              }}
+            >
+              <AntDesign
+                name='arrowleft'
+                size={32}
+                color={colors.darkGreen}
+                style={{ marginLeft: 12, marginTop: 20 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
 
 export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
   navigation,
+  route,
 }) => {
   return (
     <Stack.Navigator
@@ -115,7 +144,7 @@ export const ExploreNavigator: React.FC<{ navigation: any; route: any }> = ({
         cardStyle: { backgroundColor: '#fff' },
       }}
     >
-      <Stack.Screen name='Explore' component={Explore} />
+      <Stack.Screen name='Explore Meals' component={Explore} />
       <Stack.Screen
         name='Meal details'
         component={MealDetails}
@@ -164,7 +193,7 @@ export const ProfileNavigator = () => {
   );
 };
 
-export const LoginNavigator = () => {
+export const LoginNavigator: React.FC<{ navigation: any}> = ({ navigation }) => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -185,7 +214,27 @@ export const LoginNavigator = () => {
         component={Login}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name='Sign up' component={SignUp} />
+      <Stack.Screen
+        name='Sign up'
+        component={SignUp}
+        options={{
+          headerLeft: (props) => (
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => {
+                navigation.pop();
+              }}
+            >
+              <AntDesign
+                name='arrowleft'
+                size={32}
+                color={colors.darkGreen}
+                style={{ marginLeft: 12, marginTop: 20 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };

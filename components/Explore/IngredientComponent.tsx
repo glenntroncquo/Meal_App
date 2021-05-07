@@ -19,6 +19,7 @@ export const IngredientComponent: React.FC<{
         borderBottomWidth: 1,
         borderBottomColor: colors.opacityGray,
         alignItems: 'center',
+        paddingBottom:16
       }}
     >
       <Image
@@ -28,7 +29,7 @@ export const IngredientComponent: React.FC<{
         style={{ width: 64, height: 64, borderRadius: 50, marginRight: 16 }}
       />
       <View style={{flex: 1}}>
-        <Text style={[textStyles.semi, { flexShrink: 1 }]}>{amount}</Text>
+        <Text style={[textStyles.semi, { flexShrink: 1}]}>{amount}</Text>
       </View>
     </View>
   );

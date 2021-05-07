@@ -1,8 +1,9 @@
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text, View } from 'react-native';
-import colors from '../../styles/colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import colors from '../../styles/colors';
 import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 export const OptionsComponent: React.FC = () => {

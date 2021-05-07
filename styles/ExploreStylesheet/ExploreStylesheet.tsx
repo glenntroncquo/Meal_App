@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 import colors from '../colors';
 
 export const modalView = StyleSheet.create({
@@ -52,7 +52,6 @@ export const ExploreStylesheet = StyleSheet.create({
   },
   buttonView: {
     marginBottom: 32,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    alignItems:'center',
   },
 });

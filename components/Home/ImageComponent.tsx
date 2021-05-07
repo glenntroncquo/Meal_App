@@ -1,3 +1,4 @@
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, Text, View } from 'react-native';
@@ -64,7 +65,7 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
 
   const handlePress = (dayIndex: number) => {
     if (titleArr[dayIndex] === 'Click to add meal')
-      navigation.navigate('ExploreTab');
+      navigation.navigate('Explore');
     else navigation.navigate('Meal details', { id: idArr[dayIndex] });
   };
   return (
@@ -76,12 +77,11 @@ export const ImageComponent: React.FC<Props> = ({ dayIndex, navigation }) => {
       >
         <ImageBackground
           source={
-            imageArr[dayIndex] == ''
+            imageArr[dayIndex] != 'https://plchldr.co/i/300x300?bg=FFFFFF'
               ? {
-                  uri:
-                    'https://spoonacular.com/recipeImages/665744-556x370.jpg',
+                  uri: imageArr[dayIndex],
                 }
-              : { uri: imageArr[dayIndex] }
+              : require('../../assets/nothing.png')
           }
           style={Homestylesheet.image}
           imageStyle={Homestylesheet.imageStyle}

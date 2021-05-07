@@ -3,7 +3,6 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 
 import { ResultComponent } from '../../components/Explore/ResultComponent';
 import { apiKey } from '../../api/details';
-import { Text } from 'react-native-elements';
 import { ExploreStylesheet } from '../../styles/ExploreStylesheet/ExploreStylesheet';
 
 const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
@@ -53,10 +52,6 @@ const Explore: React.FC<{ navigation: any }> = ({ navigation }) => {
             navigation={navigation}
           />
         );
-      })}
-
-      {searchData.map((item) => {
-        <Text>{item}</Text>;
       })}
     </ScrollView>
   );

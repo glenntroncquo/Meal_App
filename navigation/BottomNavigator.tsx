@@ -13,15 +13,13 @@ import colors from '../styles/colors';
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator: React.FC = () => {
-
   return (
     <Tab.Navigator
       initialRouteName='Home'
       tabBarOptions={{
         activeTintColor: colors.darkGreen,
         inactiveTintColor: 'black',
-        style:{height:58},
-        // style: { height: 58, backgroundColor: colors.normalPink, },
+        style: { height: 58 },
         labelStyle: {
           paddingBottom: 6,
           fontSize: 12,
@@ -30,7 +28,7 @@ const BottomNavigator: React.FC = () => {
       }}
     >
       <Tab.Screen
-        name='HomeTab'
+        name='Home'
         component={HomeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -39,7 +37,7 @@ const BottomNavigator: React.FC = () => {
         }}
       />
       <Tab.Screen
-        name='ExploreTab'
+        name='Explore'
         component={ExploreNavigator}
         options={{
           tabBarIcon: ({ color }) => (
@@ -47,7 +45,7 @@ const BottomNavigator: React.FC = () => {
           ),
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name='Favorites'
         component={FavoriteNavigator}
         options={{
@@ -55,11 +53,10 @@ const BottomNavigator: React.FC = () => {
             <Ionicons name='heart' size={24} color={color} />
           ),
         }}
-      /> */}
+      />
       <Tab.Screen
-        name='ProfileTab'
+        name='Profile'
         component={ProfileNavigator}
-        
         options={{
           tabBarIcon: ({ color }) => (
             <Ionicons name='person-sharp' size={24} color={color} />

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import { apiKey } from '../../api/details';
-import colors from '../../styles/colors';
 import { ImageComponent } from '../../components/Explore/ImageComponent';
 import { container } from '../../styles/generics';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,6 +15,8 @@ import { ModalComponent } from '../../components/Explore/ModalComponent/ModalCom
 
 import firebase, { auth } from '../../utils/firebase';
 import { ExploreStylesheet } from '../../styles/ExploreStylesheet/ExploreStylesheet';
+import { LikeComponent } from '../../components/Explore/LikeComponent';
+import { week } from '../../utils/week';
 
 interface Meal {
   steps: [''];
@@ -28,14 +29,23 @@ interface Meal {
   ingredientAmount: [''];
 }
 
-const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
-  route,
-}) => {
+const MealDetail: React.FC<{ route: any; image: string }> = ({ route }) => {
   const { id } = route.params;
 
   const [activeState, setActiveState] = useState(0);
   const [active, setActive] = useState<boolean>(false);
   const [activeDay, setActiveDay] = useState<number>();
+  const [favorite, setFavorite] = useState<boolean>(false);
+
+  const createTwoButtonAlert = () =>
+    Alert.alert('Alert Title', 'My Alert Msg', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      { text: 'OK', onPress: () => console.log('OK Pressed') },
+    ]);
 
   const [ingredientName, setIngredientName] = useState<Meal['ingredientName']>([
     '',
@@ -46,6 +56,7 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   const [ingredientAmount, setIngredientAmount] = useState<
     Meal['ingredientName']
   >(['']);
+  const [indexRemove, setIndexRemove] = useState<number>();
 
   const [steps, setSteps] = useState<Meal['steps']>(['']);
 
@@ -54,10 +65,20 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   const [imageMeal, setImageMeal] = useState<Meal['imageMeal']>(
     'https://plchldr.co/i/300x300?bg=FFFFFF'
   );
-
   const [loaded, setLoaded] = useState(false);
 
+  const checkFavorites = () => {
+    firebase
+      .database()
+      .ref('/user/' + auth.currentUser?.uid + '/favorites/' + id)
+      .on('value', (snapshot) => {
+        snapshot.val() ? setFavorite(true) : null;
+      });
+  };
+
   useEffect(() => {
+    checkFavorites();
+
     fetch(
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`
     )
@@ -96,16 +117,42 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
       });
   }, []);
 
-  const setAsync = async () => {
-    await AsyncStorage.setItem('test', 'nigger');
-
-    const value = await AsyncStorage.getItem('test');
-  };
-
   useEffect(() => {
     setLoaded(true);
-    setAsync();
   }, [imageMeal]);
+
+  const addToFavorites = async () => {
+    await firebase
+      .database()
+      .ref('/user/' + auth.currentUser?.uid + '/favorites/' + id)
+      .set({
+        name: title,
+        image: imageMeal,
+      });
+  };
+
+  const removeFavorites = async () => {
+    await firebase
+      .database()
+      .ref('/user/' + auth.currentUser?.uid + '/favorites/' + id)
+      .remove();
+  };
+
+  const handleRemove = async () => {
+    await firebase
+      .database()
+      .ref('/user/' + auth.currentUser?.uid + '/week/' + indexRemove)
+      .set({
+        image: week[0]['image'],
+        name: week[0]['name'],
+        id: week[0]['id'],
+      });
+  };
+
+  const handleLike = () => {
+    setFavorite(!favorite);
+    favorite === false ? addToFavorites() : removeFavorites();
+  };
 
   const handleSwitch = (state: number) => {
     setActiveState(state);
@@ -118,6 +165,7 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
   const handlePressDay = (day: number) => {
     setActive(!active);
     setActiveDay(day);
+    // setRemove(false)
   };
   const setDataDay: Function = async () => {
     //@ts-ignore
@@ -134,7 +182,6 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
         .ref('/user/' + auth.currentUser?.uid + '/week')
         .set(weekdata);
     }
-    activeDay != null ? console.log(weekdata) : null;
   };
   useEffect(() => {
     setDataDay();
@@ -144,6 +191,8 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
     <>
       {loaded ? (
         <ScrollView style={[container.basicContainer]}>
+          <LikeComponent active={favorite} customfunction={handleLike} />
+
           <ImageComponent uri={imageMeal} title={title} />
           <View style={ExploreStylesheet.mealDetailView}>
             <IconComponent state={activeState} handleSwitch={handleSwitch} />
@@ -179,6 +228,7 @@ const MealDetail: React.FC<{ route: any; image: string; iets: any }> = ({
               name='Add to calendar'
               customfunction={handleCalendarButton}
             />
+
             <ModalComponent
               active={active}
               handlePress={handleCalendarButton}

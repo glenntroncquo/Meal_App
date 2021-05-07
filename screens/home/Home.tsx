@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Text, ScrollView } from 'react-native';
 import { container, textStyles } from '../../styles/generics';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import firebase, { auth } from '../../utils/firebase';
-
 import WeekComponent from '../../components/Home/WeekComponent';
 import { ImageComponent } from '../../components/Home/ImageComponent';
-import { OptionsComponent } from '../../components/Home/OptionsComponent';
-import { week } from '../../utils/week';
-import { RandomComponent } from '../../components/Home/RandomComponent';
+import { RandomImageComponent } from '../../components/Home/RandomImageComponent';
 
 const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
   const daysOfWeek = new Array('mo', 'tu', 'we', 'th', 'fr', 'sa', 'su');
@@ -22,27 +17,6 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
 
   const handleClick = (selectedDay: number) => {
     setDayIndex(selectedDay);
-  };
-
-  useEffect(() => {
-    let week;
-    firebase
-      .database()
-      .ref('/user/' + auth.currentUser?.uid + '/week')
-      .on('value', (snapshot) => {
-        week = snapshot;
-      });
-      // console.log(week);
-
-    // AsyncStorage.setItem('calendar', JSON.stringify(week));
-  }, []);
-
-  const checkWeek = async () => {
-    let now = new Date();
-    let onejan = new Date(now.getFullYear(), 0, 1);
-    let week = Math.ceil(
-      ((now.getTime() - onejan.getTime()) / 86400000 + onejan.getDay() + 1) / 7
-    );
   };
 
   return (
@@ -58,13 +32,19 @@ const Home: React.FC<{ navigation: any }> = ({ navigation }) => {
         dayOfMonth={dayOfMonth}
       />
 
-      <ImageComponent
-        dayIndex={dayIndex}
-        navigation={navigation}
-      />
-      <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>Random Meals</Text>
+      <ImageComponent dayIndex={dayIndex} navigation={navigation} />
+      <Text style={[textStyles.semiBold, { marginBottom: 16 }]}>
+        Random Meals
+      </Text>
 
-      <RandomComponent navigation={navigation}/>
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
+        horizontal={true}
+        scrollEventThrottle={16}
+        style={{ flex: 1 }}
+      >
+        <RandomImageComponent navigation={navigation} />
+      </ScrollView>
     </ScrollView>
   );
 };

@@ -8,7 +8,6 @@ export const checkLogin: Function = async (navigation: any) => {
   await SplashScreen.preventAutoHideAsync();
 
   const setAsyncStorage: Function = async (data: []) => {
-    // console.log(data);
     await AsyncStorage.setItem('calendar', JSON.stringify(data));
     navigation.replace('BottomNavigator');
   };
@@ -24,18 +23,16 @@ export const checkLogin: Function = async (navigation: any) => {
   };
 
   const getDb: Function = async (id: string) => {
-    firebase
-      .database()
-      .ref('/user/' + id + '/week')
-      .on('value', (snapshot) => {
-        if (snapshot.exists()) {
-          setAsyncStorage(snapshot);
-        } else {
-          setDb(id);
-        }
-      });
+    const ref = firebase.database().ref('/user/' + id + '/week');
 
-    navigation.replace('BottomNavigator');
+    const data = ref.on('value', (snapshot) => {
+      if (snapshot.exists()) {
+        setAsyncStorage(snapshot);
+      } else {
+        setDb(id);
+      }
+      ref.off();
+    });
   };
 
   firebase.auth().onAuthStateChanged((user) => {

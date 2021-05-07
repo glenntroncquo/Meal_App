@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { Dimensions, ImageBackground, Text, View } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import React from 'react';
+import { ImageBackground, Text, View } from 'react-native';
 import colors from '../../styles/colors';
 import { Homestylesheet } from '../../styles/HomeStylesheet/Homestylesheet';
 
 interface Props {
-  // dayIndex: number;
   uri: string
   title: string
 }

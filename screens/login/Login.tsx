@@ -57,7 +57,7 @@ export const Login: React.FC<{ navigation: any }> = ({ navigation }) => {
       />
 
       <TextInput
-        placeholder='Password'
+        placeholder='password'
         style={
           isFocusedPassword ? textInputStyle.active : textInputStyle.normal
         }

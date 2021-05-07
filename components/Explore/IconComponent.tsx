@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Text } from 'react-native-elements';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import colors from '../../styles/colors';
 
 export const IconComponent: React.FC<{
@@ -11,29 +12,6 @@ export const IconComponent: React.FC<{
 }> = ({ state, handleSwitch }) => {
   return (
     <>
-      {/* <TouchableOpacity
-        onPress={() => {
-          handleSwitch(0);
-        }}
-      >
-        <View style={{ alignItems: 'center' }}>
-          <MaterialIcons
-            name='menu-book'
-            size={24}
-            color={state === 0 ? colors.darkGreen : colors.opacityGray}
-          />
-          <Text
-            style={
-              state === 0
-                ? { color: colors.darkGreen }
-                : { color: colors.opacityGray }
-            }
-          >
-            Description
-          </Text>
-        </View>
-      </TouchableOpacity> */}
-
       <TouchableOpacity
         onPress={() => {
           handleSwitch(0);
